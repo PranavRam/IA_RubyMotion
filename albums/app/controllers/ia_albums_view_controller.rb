@@ -48,9 +48,16 @@ class IAAlbumsViewController < UITableViewController
     end
   end
 
-  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
-    cell = tableView.cellForRowAtIndexPath(indexPath)
-    NSLog("Selected #{cell.album_title_label. text}")
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  # def tableView(tableView, didSelectRowAtIndexPath: indexPath)
+  #   cell = tableView.cellForRowAtIndexPath(indexPath)
+  #   NSLog("Selected #{cell.album_title_label. text}")
+  #   tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  # end
+  
+  def prepareForSegue(segue, sender: sender)
+    selectedIndex = self.tableView.indexPathForSelectedRow
+    album = self.albums[selectedIndex.row]
+    segue.destinationViewController.album = album
+    self.tableView.deselectRowAtIndexPath(selectedIndex, animated: true)    
   end
 end
