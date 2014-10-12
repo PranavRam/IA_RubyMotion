@@ -1,0 +1,3 @@
+class IAViewController < UIViewController
+
+end
